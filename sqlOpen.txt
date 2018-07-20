@@ -1,0 +1,2 @@
+.restore cards.cdb
+select id,level,element1,element2,name,archetype,effect,d.code from datas as d inner join texts as t on d.code==t.code;

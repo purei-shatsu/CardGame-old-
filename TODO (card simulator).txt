@@ -1,0 +1,60 @@
+Breve:
+	[Fazer as interfaces de modo que, mesmo um jogador que não saiba jogar, consiga fazer tudo clicando aleatoriamente]
+	List
+		Fazer clique direto nas cartas da mesa/mão (sem aparecer lista), caso todas as cartas da lista estejam na mesa/mão
+		Escrever location e indicar side (de preferência, não textual [pode ser por cor]) de cada carta
+	Arrumar AI
+		[Usar heurísticas (genéricas) ao invés de força bruta]
+		Play Phase
+			Vantagem (quantidade de componentes diferentes, cartas da mesa e cartas da mão)
+			Ataque (nível total, quantidade de ataques)
+		Attack Phase
+			Maximizar o dano
+			Maximizar a perda de vantagem do oponente
+			Minimizar a quantidade de draws
+				[É um 0 em termos de vantagem, mas mesmo assim ciclar pelas cartas é vantajoso]
+		Efeitos
+			...
+	AI
+		Efeitos
+			Choices
+				Possibilidades:
+					Mudar o sistema de scripts, para que a choose receba uma função de callback de continuação (último parâmetro), ao invés de retornar as cartas escolhidas
+						Ler os scripts existentes antes para ver se isso é suficiente
+						Outros coisas que dependem de escolhas:
+							Play/Move: posição destino da carta (importa na Attack Phase)
+							Sub-efeitos opcionais: ativar ou não
+					Clonar coroutine antes de fazer a escolha (fork() style)
+					Reexecutar o efeito inteiro várias vezes, fazendo todas as combinações de escolhas possíveis
+						Ver arvoreRec.lua
+			Trigger Effects
+				triggerEvent adiciona os efeitos como possibilidades, que a AI pode ativar ou não
+			Levels 0
+		Play
+			Cartas sem battle effects (on defeat, on bind, etc) são priorizadas como componentes (critério de desempate)
+				Como fazer: cartas com battle effects na mesa (não componentes) são tratadas com nível 0.5 a mais que seu nível
+				Não some diretamente. Ao invés disso, adicione um level 0.5 na lista
+
+Futuro:
+	Animações e sons
+	Double click joga carta
+	Efeitos trigger opcionais (no momento, todos são forçados)
+	Attack on empty deck (win)
+
+Talvez:
+	Permitir ordenar mão na attack phase e turno do oponente
+	Fazer as proporções funcionarem melhor com outros tamanhos de tela (ex: 1024x768)
+		Ou usar 'exclusive' no fullscreen e dar resize na tela com valor proporcional a 1280x720
+	Online
+	Mudar sistema de addToLocation e removeFromLocation. O atual:
+		Treme quando levels 0 são usados
+		Pode dar problemas em certas situações (ex: charge de uma carta da mão)
+
+
+
+
+
+
+
+
+

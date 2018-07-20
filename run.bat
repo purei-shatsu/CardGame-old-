@@ -1,0 +1,2 @@
+LOVE\love LOVE\..
+pause
